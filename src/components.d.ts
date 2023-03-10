@@ -6,56 +6,39 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
-    interface MyComponent {
-        /**
-          * The first name
-         */
-        "first": string;
-        /**
-          * The last name
-         */
-        "last": string;
-        /**
-          * The middle name
-         */
-        "middle": string;
+    interface MyCounter {
+        "initValue": number;
     }
 }
+export interface MyCounterCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLMyCounterElement;
+}
 declare global {
-    interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
+    interface HTMLMyCounterElement extends Components.MyCounter, HTMLStencilElement {
     }
-    var HTMLMyComponentElement: {
-        prototype: HTMLMyComponentElement;
-        new (): HTMLMyComponentElement;
+    var HTMLMyCounterElement: {
+        prototype: HTMLMyCounterElement;
+        new (): HTMLMyCounterElement;
     };
     interface HTMLElementTagNameMap {
-        "my-component": HTMLMyComponentElement;
+        "my-counter": HTMLMyCounterElement;
     }
 }
 declare namespace LocalJSX {
-    interface MyComponent {
-        /**
-          * The first name
-         */
-        "first"?: string;
-        /**
-          * The last name
-         */
-        "last"?: string;
-        /**
-          * The middle name
-         */
-        "middle"?: string;
+    interface MyCounter {
+        "initValue"?: number;
+        "onCounterValueChange"?: (event: MyCounterCustomEvent<any>) => void;
     }
     interface IntrinsicElements {
-        "my-component": MyComponent;
+        "my-counter": MyCounter;
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
-            "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
+            "my-counter": LocalJSX.MyCounter & JSXBase.HTMLAttributes<HTMLMyCounterElement>;
         }
     }
 }

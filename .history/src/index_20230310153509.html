@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
+    <title>Stencil Component Starter</title>
+
+    <script type="module" src="/build/my-counter.esm.js"></script>
+    <script nomodule src="/build/my-counter.js"></script>
+  </head>
+  <body>
+    <my-counter id="myCounter"></my-counter>
+
+    <script>
+
+      var myCounter = document.getElementById('myCounter');
+      setTimeout(() => {
+        myCounter.iniValue = 5;
+      }, 3000);
+
+      myCounter.addEventListener('counterValueChange', event => {
+        console.log(`Valor del contador: ${ event.target.value }`);
+      })
+
+    </script>
+  </body>
+</html>
